@@ -1,5 +1,10 @@
 Revision history for Bencher-Scenario-ListUtil
 
+0.02    2015-12-18 (PERLANCAR)
+
+	- Update module name (List::Util::PP -> PERLANCAR::List::Util::PP).
+
+
 0.01    2015-12-17 (PERLANCAR)
 
         - First release.
