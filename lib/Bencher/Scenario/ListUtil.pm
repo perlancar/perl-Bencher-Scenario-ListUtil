@@ -1,4 +1,4 @@
-package Bencher::Scenario::ListMoreUtils;
+package Bencher::Scenario::ListUtil;
 
 # DATE
 # VERSION
@@ -9,78 +9,100 @@ use warnings;
 
 our $scenario = {
     participants => [
-        # uniq
+        # max
         {
-            tags => ['arg1'],
-            fcall_template => 'List::MoreUtils::PP::uniq(@{<list>})',
+            tags => ['numeric'],
+            fcall_template => 'List::Util::max(@{<list>})',
         },
         {
-            tags => ['arg1'],
-            module => 'List::MoreUtils::XS',
-            function => 'uniq',
-            code_template => 'List::MoreUtils::uniq(@{<list>})',
+            tags => ['numeric'],
+            fcall_template => 'List::Util::PP::max(@{<list>})',
         },
-
-        # minmax
+        # maxstr
         {
-            tags => ['arg1'],
-            fcall_template => 'List::MoreUtils::PP::minmax(@{<list>})',
+            tags => ['stringy'],
+            fcall_template => 'List::Util::maxstr(@{<list>})',
         },
         {
-            tags => ['arg1'],
-            module => 'List::MoreUtils::XS',
-            function => 'minmax',
-            code_template => 'List::MoreUtils::minmax(@{<list>})',
+            tags => ['stringy'],
+            fcall_template => 'List::Util::PP::maxstr(@{<list>})',
         },
 
-        # first
+        # min
         {
-            tags => ['arg1'],
-            module   => 'List::MoreUtils::PP',
-            function => 'firstidx',
-            code_template => 'List::MoreUtils::PP::firstidx(sub{$_==-1}, @{<list>})',
+            tags => ['numeric'],
+            fcall_template => 'List::Util::min(@{<list>})',
         },
         {
-            tags => ['arg1'],
-            module   => 'List::MoreUtils::XS',
-            function => 'firstidx',
-            code_template => 'List::MoreUtils::firstidx(sub{$_==-1}, @{<list>})',
+            tags => ['numeric'],
+            fcall_template => 'List::Util::PP::min(@{<list>})',
         },
+        # minstr
+        {
+            tags => ['stringy'],
+            fcall_template => 'List::Util::minstr(@{<list>})',
+        },
+        {
+            tags => ['stringy'],
+            fcall_template => 'List::Util::PP::minstr(@{<list>})',
+        },
+
     ],
 
     datasets => [
         {
             name => 'num10',
             args => {
-                list => [1..9,1],
+                list => [2..5, 1,10, 6..9],
             },
-            include_participant_tags => ['arg1'],
         },
         {
             name => 'num100',
             args => {
-                list => [1..99,1],
+                list => [2..50, 1,100, 51..99],
             },
-            include_participant_tags => ['arg1'],
         },
         {
             name => 'num1000',
             args => {
-                list => [1..999,1],
+                list => [2..500, 1,1000, 501..999],
             },
-            include_participant_tags => ['arg1'],
+        },
+
+        {
+            name => 'str10',
+            args => {
+                list => ['b'..'e', 'a','j', 'f'..'i'],
+            },
+            exclude_participant_tags => ['numeric'],
+        },
+        {
+            name => 'str100', # aa..dv
+            args => {
+                list => ['ab'..'bx', 'aa','dv', 'by'..'du'],
+            },
+            exclude_participant_tags => ['numeric'],
+        },
+        {
+            name => 'str1000', # aaa..bml
+            args => {
+                list => ['aab'..'atf', 'aaa','bml', 'atg'..'bmk'],
+            },
+            exclude_participant_tags => ['numeric'],
         },
     ],
 };
 
 1;
-# ABSTRACT: Benchmark List::MoreUtils::PP vs List::MoreUtils::XS
+# ABSTRACT: Benchmark List::Util (XS) vs List::Util::PP
 
 =head1 SYNOPSIS
 
- % bencher -m ListMoreUtils [other options]...
+ % bencher -m ListUtil [other options]...
 
 
 =head1 DESCRIPTION
 
 B<EARLY VERSION, ONLY A FEW FUNCTIONS HAVE BEEN BENCHMARKED>
+
+For max*/min*, in general the XS version are about 3x faster than PP.
