@@ -16,7 +16,7 @@ our $scenario = {
         },
         {
             tags => ['numeric'],
-            fcall_template => 'List::Util::PP::max(@{<list>})',
+            fcall_template => 'PERLANCAR::List::Util::PP::max(@{<list>})',
         },
         # maxstr
         {
@@ -25,7 +25,7 @@ our $scenario = {
         },
         {
             tags => ['stringy'],
-            fcall_template => 'List::Util::PP::maxstr(@{<list>})',
+            fcall_template => 'PERLANCAR::List::Util::PP::maxstr(@{<list>})',
         },
 
         # min
@@ -35,7 +35,7 @@ our $scenario = {
         },
         {
             tags => ['numeric'],
-            fcall_template => 'List::Util::PP::min(@{<list>})',
+            fcall_template => 'PERLANCAR::List::Util::PP::min(@{<list>})',
         },
         # minstr
         {
@@ -44,7 +44,7 @@ our $scenario = {
         },
         {
             tags => ['stringy'],
-            fcall_template => 'List::Util::PP::minstr(@{<list>})',
+            fcall_template => 'PERLANCAR::List::Util::PP::minstr(@{<list>})',
         },
 
     ],
@@ -94,7 +94,7 @@ our $scenario = {
 };
 
 1;
-# ABSTRACT: Benchmark List::Util (XS) vs List::Util::PP
+# ABSTRACT: Benchmark List::Util (XS) vs PP implementation(s)
 
 =head1 SYNOPSIS
 
