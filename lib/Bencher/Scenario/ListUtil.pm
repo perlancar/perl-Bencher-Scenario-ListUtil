@@ -8,6 +8,16 @@ use strict;
 use warnings;
 
 our $scenario = {
+    summary => 'Benchmark List::Util (XS) vs PP implementation(s)',
+
+    description => <<'_',
+
+EARLY VERSION, ONLY A FEW FUNCTIONS HAVE BEEN BENCHMARKED.
+
+For max*/min*, in general the XS version are about 3x faster than PP.
+
+_
+
     participants => [
         # max
         {
@@ -94,15 +104,4 @@ our $scenario = {
 };
 
 1;
-# ABSTRACT: Benchmark List::Util (XS) vs PP implementation(s)
-
-=head1 SYNOPSIS
-
- % bencher -m ListUtil [other options]...
-
-
-=head1 DESCRIPTION
-
-B<EARLY VERSION, ONLY A FEW FUNCTIONS HAVE BEEN BENCHMARKED>
-
-For max*/min*, in general the XS version are about 3x faster than PP.
+# ABSTRACT:
